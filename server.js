@@ -27,6 +27,12 @@ app.use("/api/download-launcher", require("./routes/download")); // /api/downloa
 // Rota de checkout com Stripe
 app.use("/api/checkout", require("./routes/checkout")); // /api/checkout
 
+// Rota teste
+app.get("/", (req, res) => {
+  res.send("🚀 Backend está rodando!");
+});
+
+
 // Inicializa servidor
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Servidor rodando na porta ${PORT}`));
