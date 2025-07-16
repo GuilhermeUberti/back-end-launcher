@@ -10,8 +10,9 @@ app.use("/api/webhook", require("./routes/webhook"));
 
 // Middlewares
 app.use(cors({
-  origin: "*", // OU substitua "*" por "https://seu-site.vercel.app" para mais segurança
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"], 
 }));
 app.use(express.json());
 
