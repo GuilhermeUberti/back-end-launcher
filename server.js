@@ -10,7 +10,8 @@ app.use("/api/webhook", require("./routes/webhook"));
 
 // Middlewares
 app.use(cors({
-  origin: "*", // Ou especifique: "https://front-end-launcher-vjln.vercel.appaa"
+  origin: "*", // OU substitua "*" por "https://seu-site.vercel.app" para mais segurança
+  methods: ["GET", "POST", "PUT", "DELETE"],
 }));
 app.use(express.json());
 
