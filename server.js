@@ -9,7 +9,9 @@ const app = express();
 app.use("/api/webhook", require("./routes/webhook"));
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  origin: "*", // Ou especifique: "https://front-end-launcher-vjln.vercel.app"
+}));
 app.use(express.json());
 
 // Conexão com MongoDB Atlas
