@@ -18,7 +18,7 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
     );
   } catch (err) {
     console.error("Webhook signature verification failed:", err.message);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
+    return res.status(400).send(`Webhook Error: ${err.message}`); 
   }
 
   if (event.type === "checkout.session.completed") {
