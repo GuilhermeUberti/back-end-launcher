@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
             currency: "brl",
             product_data: {
               name: "Pacote GiftPlay",
-              description: "Assinatura para liberar o launcher",
+              description: "Assinatura para liberar o Launcher",
             },
             unit_amount: 1, // R$19,90
           },
