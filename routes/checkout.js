@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
               name: "Pacote GiftPlay",
               description: "Assinatura para liberar o launcher",
             },
-            unit_amount: 1990, // R$19,90
+            unit_amount: 1, // R$19,90
           },
           quantity: 1,
         },
