@@ -29,7 +29,7 @@ router.get("/profile", authMiddleware(), async (req, res) => {
         name: user.name,
         email: user.email,
         assinatura_ativa: assinaturaAtiva,
-      },
+      }, 
     });
 
   } catch (err) {
