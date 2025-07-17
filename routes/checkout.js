@@ -5,6 +5,7 @@ const Stripe = require("stripe");
 const { default: mongoose } = require("mongoose");
 const User = require("../models/User");
 
+console.log("Stripe Key:", process.env.STRIPE_SECRET_KEY); // remova depois do teste
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 router.post("/", async (req, res) => {
@@ -30,7 +31,7 @@ router.post("/", async (req, res) => {
             },
             unit_amount: 1, // R$19,90
           },
-          quantity: 1,
+          quantity: 50,
         },
       ],
       success_url: process.env.FRONT_SUCCESS_URL,
