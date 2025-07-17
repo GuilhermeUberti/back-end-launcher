@@ -15,7 +15,7 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"], 
 }));
 app.use(express.json());
-
+git 
 // Conexão com MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ Conectado ao MongoDB Atlas"))
