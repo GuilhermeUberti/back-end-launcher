@@ -31,6 +31,9 @@ app.use("/api/download-launcher", require("./routes/download")); // /api/downloa
 // Rota de checkout com Stripe
 app.use("/api/checkout", require("./routes/checkout")); // /api/checkout
 
+// ✅ Nova rota de contato por e-mail
+app.use("/api/email", require("./routes/email")); // /api/email/contato
+
 // Rota raiz
 app.get("/", (req, res) => {
   res.send("🚀 Backend está rodando!");
