@@ -37,7 +37,8 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
     }
   }
 
-  res.json({ received: true });
+  return res.status(200).json({ received: true });
+
 });
 
 module.exports = router;

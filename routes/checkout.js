@@ -1,11 +1,8 @@
-// routes/checkout.js
 const express = require("express");
 const router = express.Router();
 const Stripe = require("stripe");
-const { default: mongoose } = require("mongoose");
 const User = require("../models/User");
 
-console.log("Stripe Key:", process.env.STRIPE_SECRET_KEY); // remova depois do teste
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 router.post("/", async (req, res) => {
@@ -18,20 +15,13 @@ router.post("/", async (req, res) => {
     if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
 
     const session = await stripe.checkout.sessions.create({
-      mode: "payment",
+      mode: "subscription",
       payment_method_types: ["card"],
-      customer: user.stripeCustomerId, // já está no seu banco!
+      customer: user.stripeCustomerId,
       line_items: [
         {
-          price_data: {
-            currency: "brl",
-            product_data: {
-              name: "Pacote GiftPlay",
-              description: "Assinatura para liberar o Launcher",
-            },
-            unit_amount: 1, // R$19,90
-          },
-          quantity: 50,
+          price: "price_1RmeYK09Kb8iFzjuK53ERi9K", // ID do plano mensal no Stripe
+          quantity: 1,
         },
       ],
       success_url: process.env.FRONT_SUCCESS_URL,
@@ -40,8 +30,8 @@ router.post("/", async (req, res) => {
 
     res.json({ url: session.url });
   } catch (err) {
-    console.error("Erro ao criar checkout:", err.message);
-    res.status(500).json({ msg: "Erro ao criar checkout" });
+    console.error("Erro ao criar sessão de assinatura:", err.message);
+    res.status(500).json({ msg: "Erro ao criar assinatura" });
   }
 });
 
