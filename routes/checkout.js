@@ -13,6 +13,8 @@ router.post("/", async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
+    console.log("Usuário encontrado:", user);
+
 
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
@@ -30,7 +32,7 @@ router.post("/", async (req, res) => {
 
     res.json({ url: session.url });
   } catch (err) {
-    console.error("Erro ao criar sessão de assinatura:", err.message);
+    console.error("Erro ao criar sessão de assinatura:", err);
     res.status(500).json({ msg: "Erro ao criar assinatura" });
   }
 });
