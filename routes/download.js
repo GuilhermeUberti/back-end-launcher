@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 const authMiddleware = require("../middlewares/authMiddleware");
 
 const router = express.Router();
@@ -11,8 +10,11 @@ router.get("/", authMiddleware, (req, res) => {
     return res.status(403).json({ sucesso: false, msg: "Assinatura inativa" });
   }
 
-  const launcherPath = path.join(__dirname, "../files/GiftPlayLauncher.exe");
-  res.download(launcherPath, "GiftPlayLauncher.exe");
+  // Redirecionar para o link do GitHub
+  const githubDownloadURL =
+    "https://github.com/GuilhermeUberti/giftplay-installer/releases/download/v1.0.0/GiftPlayInstaller.exe";
+
+  return res.redirect(githubDownloadURL);
 });
 
 module.exports = router;
