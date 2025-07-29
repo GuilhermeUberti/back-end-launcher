@@ -26,7 +26,8 @@ app.use("/api/auth", require("./routes/auth"));
 
 // Rotas protegidas
 app.use("/api/user", require("./routes/user")); // /api/user/profile
-app.use("/api/download-launcher", require("./routes/download")); // /api/download-launcher
+app.use("/download-launcher", require("./routes/download")); // /api/download-launcher
+
 
 // Rota de checkout com Stripe
 app.use("/api/checkout", require("./routes/checkout")); // /api/checkout
