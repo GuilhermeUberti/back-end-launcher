@@ -22,8 +22,8 @@ router.post("/", async (req, res) => {
       customer: user.stripeCustomerId,
       line_items: [
         {
-          price: "price_1RmeYK09kb8iFzjuK53ERi9K", // ID do plano mensal no Stripe
-          quantity: 1,
+          price: "price_1RqaQT09kb8iFzjuNhPBQkFk", // ID do plano mensal no Stripe    
+          quantity: 1,       
         },
       ],
       success_url: process.env.FRONT_SUCCESS_URL,
