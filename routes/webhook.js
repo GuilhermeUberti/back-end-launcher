@@ -21,10 +21,14 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
   }
 
   const { type, data } = event;
+  console.log("📥 Evento recebido:", type);
 
   try {
     switch (type) {
-      case "checkout.session.completed": {
+      // Eventos que ativam assinatura
+      case "checkout.session.completed":
+      case "invoice.payment_succeeded":
+      case "customer.subscription.created": {
         const session = data.object;
         const stripeCustomerId = session.customer;
 
@@ -33,10 +37,13 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
           user.assinatura_ativa = true;
           await user.save();
           console.log(`✅ Assinatura ativada para ${user.email}`);
+        } else {
+          console.warn(`⚠️ Usuário não encontrado para ${stripeCustomerId}`);
         }
         break;
       }
 
+      // Eventos que desativam assinatura
       case "customer.subscription.deleted":
       case "invoice.payment_failed": {
         const subscription = data.object;
@@ -47,10 +54,13 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
           user.assinatura_ativa = false;
           await user.save();
           console.log(`❌ Assinatura desativada para ${user.email}`);
+        } else {
+          console.warn(`⚠️ Usuário não encontrado para ${stripeCustomerId}`);
         }
         break;
       }
 
+      // Outros eventos
       default:
         console.log(`ℹ️ Evento não tratado: ${type}`);
     }
